@@ -51,7 +51,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m6o3a"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gguv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6gguv"]
 radius = 59.0085
@@ -71,7 +71,7 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
-shape = SubResource("CircleShape2D_m6o3a")
+shape = SubResource("RectangleShape2D_6gguv")
 
 [node name="ShelfResearchArea" type="Area2D" parent="."]
 

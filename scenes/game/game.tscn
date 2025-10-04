@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://eq6huhdqjsps"]
+[gd_scene load_steps=7 format=4 uid="uid://eq6huhdqjsps"]
 
 [ext_resource type="TileSet" uid="uid://u5ojg25mpbih" path="res://assets/gd_res/tile_set.tres" id="1_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://4wwlc7kam4xp" path="res://scenes/characters/player/player.tscn" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://cimd17tjghgl0" path="res://scenes/characters/collector/collector.tscn" id="2_7h61r"]
 [ext_resource type="PackedScene" uid="uid://cbe0tmdd1p3u5" path="res://scenes/characters/shelf/shelf.tscn" id="3_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://bts01so8ushqe" path="res://scenes/hud/hud.tscn" id="4_kelw5"]
+[ext_resource type="PackedScene" uid="uid://d2uspnmxf34fa" path="res://scenes/characters/door/door.tscn" id="5_5i0tg"]
 
 [node name="Game" type="Node"]
 
@@ -42,5 +43,8 @@ position = Vector2(424, 200)
 
 [node name="Shelf6" parent="YSort" instance=ExtResource("3_0sr1o")]
 position = Vector2(424, 96)
+
+[node name="Door" parent="YSort" instance=ExtResource("5_5i0tg")]
+position = Vector2(433, 384)
 
 [node name="HUD" parent="." instance=ExtResource("4_kelw5")]

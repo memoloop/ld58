@@ -2,6 +2,7 @@ extends StaticBody2D
 class_name Shelf
 
 var is_empty: bool = false
+var targeted_by_collector: bool = false
 @export var progress: float = 100.0
 @export var collection_stuffs = 30
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4wwlc7kam4xp"]
+[gd_scene load_steps=21 format=3 uid="uid://4wwlc7kam4xp"]
 
 [ext_resource type="Texture2D" uid="uid://cecnygwjem3hv" path="res://assets/imgs/player.png" id="1_7uws0"]
 [ext_resource type="Script" uid="uid://parmi3o2drx1" path="res://scenes/characters/player/player.gd" id="1_t61fv"]
@@ -144,6 +144,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7uws0"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_t61fv"]
+radius = 16.0
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_t61fv")
@@ -161,5 +164,13 @@ shape = SubResource("CircleShape2D_7uws0")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
 target_position = Vector2(0, 10)
+
+[node name="DistanceBody" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DistanceBody"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_t61fv")
 
 [node name="Camera2D" type="Camera2D" parent="."]

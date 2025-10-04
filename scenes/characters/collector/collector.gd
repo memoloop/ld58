@@ -47,9 +47,10 @@ func process_when_enlisted():
 
 func _on_shelf_research_area_body_entered(body: Node2D):
 	if is_enlisted and body is Shelf and target != "shelf":
-		if not body.is_empty:
+		if not body.is_empty and not body.targeted_by_collector:
 			target = "shelf"
 			shelf_position = body.global_position
+			body.targeted_by_collector = true
 
 func _on_shelf_gripping_area_body_entered(body: Node2D):
 	if is_enlisted and target == "shelf" and body is Shelf:

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 var speed: float = 100.0
 var gripping_speed: float = 10.0
