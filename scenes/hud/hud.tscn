@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bts01so8ushqe"]
+
+[ext_resource type="Script" uid="uid://vculf0x3kwqn" path="res://scenes/hud/hud.gd" id="1_48c2t"]
+[ext_resource type="FontFile" uid="uid://b2n8wlv738x0a" path="res://assets/font/earthbound-beginnings.ttf" id="2_cgeww"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_48c2t")
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("2_cgeww")
+theme_override_font_sizes/font_size = 8
+text = "Money: 0"
+
+[node name="CollectionStuffLabel" type="Label" parent="."]
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("2_cgeww")
+theme_override_font_sizes/font_size = 8
+text = "Stuff: 0"
+
+[node name="CollectorLabel" type="Label" parent="."]
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_cgeww")
+theme_override_font_sizes/font_size = 8
+text = "Collectors: 0"

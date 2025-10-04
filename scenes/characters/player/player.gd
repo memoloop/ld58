@@ -62,11 +62,15 @@ func get_raycast_collision():
 		var collider = ray_cast.get_collider()
 		if Input.is_action_pressed("interact"):
 			if collider is Collector:
-				collider.is_enlisted = true
-				collider.collision_layer = 2
-				collider.collision_mask = 2
-				collider.z_index = -1
-				collector_list.append(collider)
+				if Global.collection_stuffs >= 5:
+					collider.is_enlisted = true
+					collider.collision_layer = 2
+					collider.collision_mask = 2
+					collider.z_index = -1
+					collector_list.append(collider)
+					Global.collectors += 1
+					Global.money += collider.money
+					Global.collection_stuffs -= 5
 
 			if collider is Shelf:
 				collider.progress -= gripping_speed

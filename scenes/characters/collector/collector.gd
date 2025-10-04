@@ -5,6 +5,7 @@ var is_enlisted: bool = false
 var direction: Vector2 = Vector2.ZERO
 var speed: float = 80.0
 var player_position: Vector2 = Vector2.ZERO
+@export var money: int = 10
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
