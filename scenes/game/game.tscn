@@ -22,4 +22,7 @@ position = Vector2(202, 123)
 [node name="Shelf" parent="YSort" instance=ExtResource("3_0sr1o")]
 position = Vector2(214, 63)
 
+[node name="Shelf2" parent="YSort" instance=ExtResource("3_0sr1o")]
+position = Vector2(325, 62)
+
 [node name="HUD" parent="." instance=ExtResource("4_kelw5")]

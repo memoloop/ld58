@@ -4,7 +4,12 @@ class_name Collector
 var is_enlisted: bool = false
 var direction: Vector2 = Vector2.ZERO
 var speed: float = 80.0
+var gripping_speed: float = 10.0
+var can_grip: bool = false
 var player_position: Vector2 = Vector2.ZERO
+var shelf_position: Vector2 = Vector2.ZERO
+var target_shelf: Shelf = null
+var target: String = "nothing" # Can be "player" or "shelf"
 @export var money: int = 10
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -16,15 +21,36 @@ func _physics_process(_delta):
         direction = Vector2.ZERO
 
     # Animation
-    animated_sprite.flip_h = direction.x < 0
+    if target == "player": animated_sprite.flip_h = direction.x < 0
     if direction.x != 0: animated_sprite.play("walk")
     else: animated_sprite.play("idle")
 
 func process_when_enlisted():
     # Follow the player by his direction
-    direction = (player_position - position).normalized()
+    if target == "player":
+        direction = (player_position - position).normalized()
+    elif target == "shelf":
+        direction = (shelf_position - position).normalized()
+
+    # Grip stuffs on shelf
+    if can_grip:
+        target_shelf.progress -= gripping_speed
+        if target_shelf.progress <= 0.0:
+            target = "player"
 
     # Apply velocity
     velocity.x = direction.x * speed
     velocity.y = direction.y * speed
     move_and_slide()
+
+func _on_shelf_research_area_body_entered(body: Node2D):
+    if is_enlisted and body is Shelf and target != "shelf":
+        if not body.is_empty:
+            target = "shelf"
+            shelf_position = body.global_position
+
+func _on_shelf_gripping_area_body_entered(body: Node2D):
+    if is_enlisted and target == "shelf" and body is Shelf:
+        if not body.is_empty:
+            target_shelf = body
+            can_grip = true

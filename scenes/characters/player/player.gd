@@ -68,6 +68,7 @@ func get_raycast_collision():
 					collider.collision_mask = 2
 					collider.z_index = -1
 					collector_list.append(collider)
+					collider.target = "player"
 					Global.collectors += 1
 					Global.money += collider.money
 					Global.collection_stuffs -= 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cimd17tjghgl0"]
+[gd_scene load_steps=12 format=3 uid="uid://cimd17tjghgl0"]
 
 [ext_resource type="Script" uid="uid://ba7fletl7c8b1" path="res://scenes/characters/collector/collector.gd" id="1_6gguv"]
 [ext_resource type="Texture2D" uid="uid://bdrubj6b6avma" path="res://assets/imgs/collector1.png" id="1_m6o3a"]
@@ -53,6 +53,12 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6o3a"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6gguv"]
+radius = 59.0085
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13dae"]
+radius = 21.0
+
 [node name="Collector" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_6gguv")
@@ -66,3 +72,18 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_m6o3a")
+
+[node name="ShelfResearchArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShelfResearchArea"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_6gguv")
+
+[node name="ShelfGrippingArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShelfGrippingArea"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_13dae")
+
+[connection signal="body_entered" from="ShelfResearchArea" to="." method="_on_shelf_research_area_body_entered"]
+[connection signal="body_entered" from="ShelfGrippingArea" to="." method="_on_shelf_gripping_area_body_entered"]

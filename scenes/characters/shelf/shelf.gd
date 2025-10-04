@@ -10,5 +10,6 @@ var is_empty: bool = false
 func _process(_delta):
     if not is_empty and progress <= 0.0:
         is_empty = true
+        progress = 0.0
         sprite.region_rect = Rect2(48, 0, 48, 62)
         Global.collection_stuffs += collection_stuffs
