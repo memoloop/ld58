@@ -15,42 +15,44 @@ var target: String = "nothing" # Can be "player" or "shelf"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(_delta):
-    if is_enlisted:
-        process_when_enlisted()
-    else:
-        direction = Vector2.ZERO
+	if is_enlisted:
+		process_when_enlisted()
+	else:
+		direction = Vector2.ZERO
 
-    # Animation
-    if target == "player": animated_sprite.flip_h = direction.x < 0
-    if direction.x != 0: animated_sprite.play("walk")
-    else: animated_sprite.play("idle")
+	# Animation
+	if target == "player": animated_sprite.flip_h = direction.x < 0
+	if direction.x != 0: animated_sprite.play("walk")
+	else: animated_sprite.play("idle")
 
 func process_when_enlisted():
-    # Follow the player by his direction
-    if target == "player":
-        direction = (player_position - position).normalized()
-    elif target == "shelf":
-        direction = (shelf_position - position).normalized()
+	# Follow the player by his direction
+	if target == "player":
+		direction = (player_position - position).normalized()
+	elif target == "shelf":
+		direction = (shelf_position - position).normalized()
 
-    # Grip stuffs on shelf
-    if can_grip:
-        target_shelf.progress -= gripping_speed
-        if target_shelf.progress <= 0.0:
-            target = "player"
+	# Grip stuffs on shelf
+	if can_grip:
+		if target_shelf != null:
+			target_shelf.progress -= gripping_speed
+			if target_shelf.progress <= 0.0:
+				target = "player"
+				target_shelf = null
 
-    # Apply velocity
-    velocity.x = direction.x * speed
-    velocity.y = direction.y * speed
-    move_and_slide()
+	# Apply velocity
+	velocity.x = direction.x * speed
+	velocity.y = direction.y * speed
+	move_and_slide()
 
 func _on_shelf_research_area_body_entered(body: Node2D):
-    if is_enlisted and body is Shelf and target != "shelf":
-        if not body.is_empty:
-            target = "shelf"
-            shelf_position = body.global_position
+	if is_enlisted and body is Shelf and target != "shelf":
+		if not body.is_empty:
+			target = "shelf"
+			shelf_position = body.global_position
 
 func _on_shelf_gripping_area_body_entered(body: Node2D):
-    if is_enlisted and target == "shelf" and body is Shelf:
-        if not body.is_empty:
-            target_shelf = body
-            can_grip = true
+	if is_enlisted and target == "shelf" and body is Shelf:
+		if not body.is_empty:
+			target_shelf = body
+			can_grip = true

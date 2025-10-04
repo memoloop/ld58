@@ -161,3 +161,5 @@ shape = SubResource("CircleShape2D_7uws0")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
 target_position = Vector2(0, 10)
+
+[node name="Camera2D" type="Camera2D" parent="."]
