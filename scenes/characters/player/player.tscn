@@ -149,11 +149,15 @@ motion_mode = 1
 script = ExtResource("1_t61fv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_4kqyw")
-animation = &"idle_down"
+animation = &"idle_side"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_7uws0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(0, 10)

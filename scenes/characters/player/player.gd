@@ -3,30 +3,69 @@ extends CharacterBody2D
 var speed: float = 100.0
 var direction: Vector2 = Vector2.ZERO
 var last_direction: String = "down"
+var animation_direction: String = "down"
+var animation_name: String = "idle"
+var collector_list: Array[Collector] = []
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var ray_cast: RayCast2D = $RayCast2D
 
 func _physics_process(_delta):
-    # Movement
-    direction.x = Input.get_axis("walk_left", "walk_right")
-    direction.y = Input.get_axis("walk_up", "walk_down")
+	# Movement
+	direction.x = Input.get_axis("walk_left", "walk_right")
+	direction.y = Input.get_axis("walk_up", "walk_down")
 
-    # Apply velocity
-    velocity.x = direction.x * speed
-    velocity.y = direction.y * speed
-    move_and_slide()
+	# Apply velocity
+	velocity.x = direction.x * speed
+	velocity.y = direction.y * speed
+	move_and_slide()
 
-    # Animation
-    if direction != Vector2.ZERO:
-        animated_sprite.play("walk_" + get_direction_as_string())
-    else:
-        animated_sprite.play("idle_" + get_direction_as_string())
+	get_direction_as_string()
+	set_raycast_direction()
+	get_raycast_collision()
+	give_position_to_collectors()
 
-func get_direction_as_string() -> String:
-    if direction.x != 0: 
-        last_direction = "side"
-        if direction.x > 0: animated_sprite.flip_h = false
-        if direction.x < 0: animated_sprite.flip_h = true
-    elif direction.y > 0: last_direction = "down"
-    elif direction.y < 0: last_direction = "up"
-    return last_direction
+	# Animation
+	match last_direction:
+			"right":
+				animation_direction = "side"
+				animated_sprite.flip_h = false
+			"left":
+				animation_direction = "side"
+				animated_sprite.flip_h = true
+			"down": animation_direction = "down"
+			"up": animation_direction = "up"
+	if direction != Vector2.ZERO: animation_name = "walk"
+	else: animation_name = "idle"
+	animated_sprite.play(animation_name + "_" + animation_direction)
+
+func get_direction_as_string():
+	if direction.x > 0: last_direction = "right"
+	elif direction.x < 0: last_direction = "left"
+	elif direction.y > 0: last_direction = "down"
+	elif direction.y < 0: last_direction = "up"
+
+func set_raycast_direction():
+	match last_direction:
+		"down":
+			ray_cast.target_position = Vector2(0, 10)
+		"up":
+			ray_cast.target_position = Vector2(0, -10)
+		"left":
+			ray_cast.target_position = Vector2(-10, 0)
+		"right":
+			ray_cast.target_position = Vector2(10, 0)
+
+func get_raycast_collision():
+	if ray_cast.is_colliding():
+		var collider = ray_cast.get_collider()
+		if collider is Collector:
+			collider.is_enlisted = true
+			collider.collision_layer = 2
+			collider.collision_mask = 2
+			collider.z_index = -1
+			collector_list.append(collider)
+
+func give_position_to_collectors():
+	for collector in collector_list:
+		collector.player_position = global_position

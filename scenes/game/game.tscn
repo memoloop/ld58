@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://eq6huhdqjsps"]
+[gd_scene load_steps=3 format=3 uid="uid://eq6huhdqjsps"]
 
 [ext_resource type="PackedScene" uid="uid://4wwlc7kam4xp" path="res://scenes/characters/player/player.tscn" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://cimd17tjghgl0" path="res://scenes/characters/collector/collector.tscn" id="2_7h61r"]
 
 [node name="Game" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource("1_sul5r")]
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSort" instance=ExtResource("1_sul5r")]
 position = Vector2(61, 71)
+
+[node name="Collector" parent="YSort" instance=ExtResource("2_7h61r")]
+position = Vector2(128, 44)
+
+[node name="Collector2" parent="YSort" instance=ExtResource("2_7h61r")]
+position = Vector2(202, 123)
