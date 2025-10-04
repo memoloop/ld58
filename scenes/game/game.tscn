@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://eq6huhdqjsps"]
+[gd_scene load_steps=4 format=3 uid="uid://eq6huhdqjsps"]
 
 [ext_resource type="PackedScene" uid="uid://4wwlc7kam4xp" path="res://scenes/characters/player/player.tscn" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://cimd17tjghgl0" path="res://scenes/characters/collector/collector.tscn" id="2_7h61r"]
+[ext_resource type="PackedScene" uid="uid://cbe0tmdd1p3u5" path="res://scenes/characters/shelf/shelf.tscn" id="3_0sr1o"]
 
 [node name="Game" type="Node"]
 
@@ -16,3 +17,6 @@ position = Vector2(128, 44)
 
 [node name="Collector2" parent="YSort" instance=ExtResource("2_7h61r")]
 position = Vector2(202, 123)
+
+[node name="Shelf" parent="YSort" instance=ExtResource("3_0sr1o")]
+position = Vector2(214, 63)

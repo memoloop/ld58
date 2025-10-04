@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var speed: float = 100.0
+var gripping_speed: float = 10.0
 var direction: Vector2 = Vector2.ZERO
 var last_direction: String = "down"
 var animation_direction: String = "down"
@@ -59,12 +60,16 @@ func set_raycast_direction():
 func get_raycast_collision():
 	if ray_cast.is_colliding():
 		var collider = ray_cast.get_collider()
-		if collider is Collector:
-			collider.is_enlisted = true
-			collider.collision_layer = 2
-			collider.collision_mask = 2
-			collider.z_index = -1
-			collector_list.append(collider)
+		if Input.is_action_pressed("interact"):
+			if collider is Collector:
+				collider.is_enlisted = true
+				collider.collision_layer = 2
+				collider.collision_mask = 2
+				collider.z_index = -1
+				collector_list.append(collider)
+
+			if collider is Shelf:
+				collider.progress -= gripping_speed
 
 func give_position_to_collectors():
 	for collector in collector_list:
