@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bts01so8ushqe" path="res://scenes/hud/hud.tscn" id="4_kelw5"]
 [ext_resource type="PackedScene" uid="uid://d2uspnmxf34fa" path="res://scenes/characters/door/door.tscn" id="5_5i0tg"]
 
-[node name="Game" type="Node"]
+[node name="Level1" type="Node"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -3
@@ -46,5 +46,6 @@ position = Vector2(424, 96)
 
 [node name="Door" parent="YSort" instance=ExtResource("5_5i0tg")]
 position = Vector2(433, 384)
+next_level = "uid://dn76pcsj6puc1"
 
 [node name="HUD" parent="." instance=ExtResource("4_kelw5")]

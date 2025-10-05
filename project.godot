@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LD58"
-run/main_scene="uid://eq6huhdqjsps"
+run/main_scene="uid://dn76pcsj6puc1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [autoload]

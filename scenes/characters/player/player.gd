@@ -8,6 +8,8 @@ var last_direction: String = "down"
 var animation_direction: String = "down"
 var animation_name: String = "idle"
 var collector_list: Array[Collector] = []
+var hp: float = 30.0
+var targeted_by_cop: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast: RayCast2D = $RayCast2D
