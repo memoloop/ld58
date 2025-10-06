@@ -19,12 +19,18 @@ func _physics_process(_delta):
 	if direction != Vector2.ZERO: animated_sprite.play("walk")
 	else: animated_sprite.play("idle")
 
+	give_position_to_collector()
+
 	# Follow target
 	match target:
 		"player":
 			if target_player != null: direction = (target_player.global_position - position).normalized()
 		"collector":
 			if target_collector != null: direction = (target_collector.global_position - position).normalized()
+		"nobody":
+			direction = Vector2.ZERO
+
+	death()
 
 	# Apply velocity
 	velocity = direction * speed
@@ -39,6 +45,7 @@ func _on_find_collector_area_body_entered(body: Node2D):
 		target = "collector"
 		body.target = "cop"
 		target_collector = body
+		body.cop_position = global_position
 		body.targeted_by_cop = true
 
 func _on_attack_area_body_entered(body: Node2D):
@@ -46,11 +53,11 @@ func _on_attack_area_body_entered(body: Node2D):
 		attack_timer.start()
 
 func _on_attack_timer_timeout():
-	if target == "player" and target_player != null and target_player.targeted_by_cop:
-		target_player.hp -= attack
-	elif target == "collector" and target_collector != null and target_collector.targeted_by_cop:
+	if target == "collector" and target_collector != null and target_collector.targeted_by_cop:
 		target_collector.hp -= attack
 		hp -= target_collector.attack
+	elif target == "player" and target_player != null and target_player.targeted_by_cop:
+		target_player.hp -= attack
 	attack_timer.start()
 
 func _on_find_collector_area_body_exited(body: Node2D):
@@ -68,3 +75,7 @@ func death():
 	if hp <= 0.0:
 		Global.money += money
 		queue_free()
+
+func give_position_to_collector():
+	if target_collector != null and target == "collector":
+		target_collector.cop_position = global_position

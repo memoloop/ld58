@@ -80,5 +80,8 @@ func get_raycast_collision():
 				collider.progress -= gripping_speed
 
 func give_position_to_collectors():
+	var index = 0
 	for collector in collector_list:
-		collector.player_position = global_position
+		if collector != null: collector.player_position = global_position
+		else: collector_list.remove_at(index)
+		index += 1

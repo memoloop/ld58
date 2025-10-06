@@ -10,6 +10,7 @@ var player_position: Vector2 = Vector2.ZERO
 var shelf_position: Vector2 = Vector2.ZERO
 var target_shelf: Shelf = null
 var target_cop: Cop = null
+var cop_position: Vector2 = Vector2.ZERO
 var target: String = "nobody" # Can be "player" or "shelf" or "cop"
 var targeted_by_cop: bool = false
 @export var money: int = 10
@@ -31,12 +32,14 @@ func _physics_process(_delta):
 
 func process_when_enlisted():
     # Follow the target by his direction
-    if target == "player":
+    if target == "cop" and target_cop != null:
+        direction = (cop_position - global_position).normalized()
+    elif target == "player":
         direction = (player_position - global_position).normalized()
     elif target == "shelf":
         direction = (shelf_position - global_position).normalized()
-    elif target == "cop" and target_cop != null:
-        direction = (target_cop.global_position - global_position).normalized()
+
+    death()
 
     # Grip stuffs on shelf
     if can_grip:
@@ -47,8 +50,7 @@ func process_when_enlisted():
                 target_shelf = null
 
     # Apply velocity
-    velocity.x = direction.x * speed
-    velocity.y = direction.y * speed
+    velocity = direction * speed
     move_and_slide()
 
 func _on_shelf_research_area_body_entered(body: Node2D):
