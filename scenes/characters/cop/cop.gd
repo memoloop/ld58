@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Cop
 
-@export var attack: float = 10.0
+@export var attack: float = 5.0
 @export var hp: float = 10.0
 @export var money: int = 50
 var speed: float = 75.0
@@ -51,11 +51,11 @@ func _on_find_collector_area_body_entered(body: Node2D):
 func _on_attack_area_body_entered(body: Node2D):
 	if body is Player or body is Collector:
 		attack_timer.start()
+		if body is Collector: target_collector.attack_timer.start()
 
 func _on_attack_timer_timeout():
 	if target == "collector" and target_collector != null and target_collector.targeted_by_cop:
 		target_collector.hp -= attack
-		hp -= target_collector.attack
 	elif target == "player" and target_player != null and target_player.targeted_by_cop:
 		target_player.hp -= attack
 	attack_timer.start()

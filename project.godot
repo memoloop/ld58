@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="LD58"
-run/main_scene="uid://dn76pcsj6puc1"
+config/name="Collectors Invasion"
+config/version="v.ld58"
+run/main_scene="uid://dva6nsc4ud3ur"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [autoload]

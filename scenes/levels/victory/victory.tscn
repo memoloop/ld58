@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://l6l66sjuodnh"]
+
+[ext_resource type="Script" uid="uid://bl0fp012uwjla" path="res://scenes/levels/victory/victory.gd" id="1_gwgcy"]
+[ext_resource type="FontFile" uid="uid://b2n8wlv738x0a" path="res://assets/font/earthbound-beginnings.ttf" id="1_kusco"]
+
+[node name="Victory" type="Node"]
+script = ExtResource("1_gwgcy")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 88.0
+offset_right = 384.0
+offset_bottom = 144.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_kusco")
+theme_override_font_sizes/font_size = 16
+text = "YOU COLLECT EVERYTHING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="."]
+offset_left = 136.0
+offset_top = 160.0
+offset_right = 248.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("1_kusco")
+text = "Menu"
+
+[connection signal="button_down" from="MenuButton" to="." method="_on_menu_button_button_down"]

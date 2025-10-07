@@ -85,5 +85,9 @@ shape = SubResource("CircleShape2D_6gguv")
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_13dae")
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="ShelfResearchArea" to="." method="_on_shelf_research_area_body_entered"]
 [connection signal="body_entered" from="ShelfGrippingArea" to="." method="_on_shelf_gripping_area_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

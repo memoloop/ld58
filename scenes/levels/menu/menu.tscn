@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dva6nsc4ud3ur"]
+
+[ext_resource type="Script" uid="uid://b3upgldwj5p14" path="res://scenes/levels/menu/menu.gd" id="1_cvgh3"]
+[ext_resource type="FontFile" uid="uid://b2n8wlv738x0a" path="res://assets/font/earthbound-beginnings.ttf" id="1_to2vt"]
+
+[node name="Menu" type="Node"]
+script = ExtResource("1_cvgh3")
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 128.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_to2vt")
+text = "COLLECTORS
+
+INVASION"
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 336.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_to2vt")
+text = "PLAY"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 256.0
+offset_top = 120.0
+offset_right = 336.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("1_to2vt")
+text = "QUIT"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 328.0
+offset_top = 200.0
+offset_right = 440.0
+offset_bottom = 223.0
+theme_override_fonts/font = ExtResource("1_to2vt")
+theme_override_font_sizes/font_size = 8
+text = "v.ld58"
+
+[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
